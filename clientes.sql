@@ -1,8 +1,11 @@
-SELECT
-  id,
-  nombre,
-  pais
-FROM
-  {{ ref('clientes_raw') }}
-WHERE
-  pais = 'México'
+WITH
+high_prio_orders AS (
+  SELECT *
+  FROM "SNOWFLAKE_SAMPLE_DATA"."TPCH_SF1"."ORDERS"
+  WHERE O_ORDERPRIORITY IN ('1-URGENT', '2-HIGH')
+)
+SELECT count(*)
+FROM high_prio_orders
+WHERE O_ORDERDATE < '1998-01-01'
+  AND O_ORDERSTATUS = 'O'
+--limit 100

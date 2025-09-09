@@ -1,0 +1,3 @@
+name: 'mi_primer_proyecto_dbt'
+config-version: 2
+version: '1.0.0'
